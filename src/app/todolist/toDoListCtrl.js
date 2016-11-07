@@ -1,25 +1,26 @@
 (function () {
-  'use strict';
+    'use strict';
 
-  angular
-    .module('todoListUi')
-    .controller('TodoListCtrl', TodoListCtrl);
+    angular
+        .module('todoListUi')
+        .controller('TodoListCtrl', TodoListCtrl);
 
-  /** @ngInject */
-  function TodoListCtrl(elTodoListService) {
+    /** @ngInject */
+    function TodoListCtrl(elTodoListService) {
 
-    var vm = this;
-    vm.getAll = getAll();
-    vm.addTask = addTask;
-    vm.remove = remove;
-    vm.edit = edit;
+        var vm = this;
+        vm.getAll = getAll;
+        vm.addTask = addTask;
 
+        function addTask(data) {
+            elTodoListService.createTask(data)
+        }
 
-    function getAll() {
-      elTodoListService.getAll().then(function (result) {
-        vm.getAll = result;
-      });
-    }
+        function getAll() {
+            elTodoListService.getAll().then(function (result) {
+                vm.getAll = result;
+            });
+        }
 
     function addTask(task) {
       elTodoListService.create(task)
@@ -43,4 +44,6 @@
     }
 
   }
+
+
 })();
