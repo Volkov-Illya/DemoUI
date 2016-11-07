@@ -6,7 +6,7 @@
         .config(config)
         .config(function (RestangularProvider) {
             // var API = 'http://localhost:3000/';
-            RestangularProvider.setBaseUrl('http://localhost:3021/');
+            RestangularProvider.setBaseUrl('http://localhost:3000');
         });
 
     /** @ngInject */
