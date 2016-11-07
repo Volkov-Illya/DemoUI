@@ -1,23 +1,27 @@
 (function () {
-    'use strict';
+  'use strict';
 
-    angular
-        .module('todoListUi')
-        .factory('elTodoListService', elTodoListService);
+  angular
+    .module('todoListUi')
+    .factory('elTodoListService', elTodoListService);
 
-    function elTodoListService(Restangular) {
+  function elTodoListService(Restangular) {
 
-        function getAll() {
-            return Restangular.all('todo').get();
-        }
+    function getAll() {
+      return Restangular.all('todo').getList();
 
-        function createTask(data) {
-            return Restangular.all('todo').post({data: data});
-        }
-
-        return {
-            getAll: getAll,
-            createTask: createTask
-        }
     }
+
+    function create(data) {
+      return Restangular.all('todo').post(data).then(function () {
+        data.name = "";
+        data.description = "";
+      })
+    }
+
+    return {
+      getAll: getAll,
+      create: create
+    }
+  }
 })();
