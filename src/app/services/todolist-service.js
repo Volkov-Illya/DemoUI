@@ -13,15 +13,27 @@
     }
 
     function create(data) {
-      return Restangular.all('todo').post(data).then(function () {
-        data.name = "";
-        data.description = "";
-      })
+      return Restangular.all('todo').post(data)
+        .then(function () {
+          data.name = "";
+          data.description = "";
+        })
+    }
+
+    function remove(data) {
+      return Restangular.one('todo', data).remove()
+    }
+
+    function edit(task) {
+      return Restangular.all('todo').one(task._id).customPUT(task);
     }
 
     return {
       getAll: getAll,
-      create: create
+      create: create,
+      remove: remove,
+      edit: edit
+
     }
   }
 })();

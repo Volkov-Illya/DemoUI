@@ -11,6 +11,8 @@
     var vm = this;
     vm.getAll = getAll();
     vm.addTask = addTask;
+    vm.remove = remove;
+    vm.edit = edit;
 
 
     function getAll() {
@@ -20,9 +22,24 @@
     }
 
     function addTask(task) {
-      elTodoListService.create(task).then(function () {
-        return getAll();
-      });
+      elTodoListService.create(task)
+        .then(function () {
+          return getAll();
+        });
+    }
+
+    function remove(id) {
+      elTodoListService.remove(id)
+        .then(function () {
+          return getAll();
+        })
+    }
+
+    function edit(task) {
+      elTodoListService.edit(task)
+        .then(function () {
+          return getAll();
+        })
     }
 
   }

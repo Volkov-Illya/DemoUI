@@ -16,7 +16,7 @@
             })
             .state('todolist', {
                 url: '/todo',
-                templateUrl: 'app/todolist/todolist.html',
+                templateUrl: 'app/views/todolist.html',
                 controller: 'TodoListCtrl',
                 controllerAs: 'vm'
             });
