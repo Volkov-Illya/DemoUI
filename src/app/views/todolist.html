@@ -19,6 +19,7 @@
 
     <li>{{task.name}}</li>
     <li>{{task.description}}</li>
+
     <button class="btn btn-danger" ng-click="vm.remove(task._id)">Remove</button>
     <button class="btn btn-warning" ng-click="showme=true">Edit</button>
     <input ng-show="showme" type="text" ng-model="task.name" placeholder="input name">
