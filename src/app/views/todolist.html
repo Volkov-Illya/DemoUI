@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="page-header">
+        <h1>Todo List App</h1>
+      </div>
+      <div class="btn btn-primarry" ng-click="vm.meow()">
+        MEOW BLYJAT
+      </div>
+
+      <form class="form-group control-label" name="addForm" ng-submit="vm.addTask(task)">
+        Create new task:
+        <input class="form-control" type="text" ng-model="task.name" name="name" placeholder=" name"/>
+        <input class="form-control" type="text" ng-model="task.description" name="description"
+               placeholder=" description"/>
+        <input class="btn btn-success form-control" type="submit"  value="Submit"/>
+      </form>
+
+        <div  ng-repeat="task in vm.getAll" >
+
+                    <button type="button" class="list-group-item"  >
+
+                                  <label>
+                                    <input class="isDone" type="checkbox" ng-model="task.isDone" ng-click="vm.isDone(task)">
+                                  </label>
+                                  <label>
+                                    <input class="glyphicon glyphicon-star-empty" type="checkbox" ng-click="vm.isFavourite(task)" ng-model="task.isFavourite">
+                                  </label>
+
+                                  <a class="glyphicon glyphicon-remove hand" ng-click="vm.remove(task._id)" ></a>
+                                  <a class="glyphicon glyphicon-edit" ng-click="showme = ! showme"> </a>
+                                  <a class="glyphicon glyphicon-inbox" ng-click="Event = !Event"> </a>
+
+                                  <span class="done done-{{task.isDone}}">
+                                    {{'Task name: ' + task.name}}
+                                    <br>
+                                    {{'Description: ' + task.description}}
+                                    <br>
+                                    {{'Subtask: ' + task.subTask.length}}
+                                  </span>
+                    </button>
+
+                  <div ng-show="showme" >
+                    <form>
+                      <p>Change this task</p>
+                    <input class="form-control" type="text" ng-model="task.name" placeholder="input name">
+                    <input class="form-control" type="text" ng-model="task.description" placeholder="input description">
+                    <input class="btn btn-success form-control" type="submit" ng-click="vm.edit(task)" value="Send"/>
+                    </form>
+
+                  </div>
+
+                  <form class="form-group control-label" name="addForm" ng-submit="vm.createSubtask(task)" ng-show="Event">
+                    Create new subtask:
+                    <input class="form-control" type="text"  ng-model="task.subTask.name"   placeholder=" name"/>
+                    <input class="btn btn-success form-control" type="submit"  value="Submit"/>
+                  </form>
+
+                  <div ng-repeat="sub in task.subTask track by $index" ng-show="Event">
+                    <ul class="list-group">
+                      <li class="list-group-item sub">
+
+                        <label>
+                          <input class="isDone" type="checkbox" ng-model="sub.isDone" ng-click="vm.isSubDone(task, sub)">
+                        </label>
+                        <a class="glyphicon glyphicon-remove hand" ng-click="vm.removeSub(task,sub)" ></a>
+                        <a class="glyphicon glyphicon-edit" ng-click="showsub = ! showsub"> </a>
+
+                        <span class="done done-{{sub.isDone}}">
+                        {{'Subtask name: ' + sub.name}}
+                        <br>
+                        {{'isDone: ' + sub.isDone}}
+                          </span>
+
+                      </li>
+                    </ul>
+
+                    <div ng-show="showsub" >
+                      <form ng-submit="vm.editSub(task, sub)">
+                        <p>Change this subtask</p>
+                        <input class="form-control" type="text" ng-model="sub.name" placeholder="input name">
+                        <input class="btn btn-success form-control" type="submit"  value="Send"/>
+                      </form>
+
+                    </div>
+
+                  </div>
+
+        </div>
+
+    </div>
+  </div>
+</div>
