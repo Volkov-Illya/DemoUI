@@ -1,4 +1,6 @@
-
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none;
+}
 
 button {
   margin: 0;
@@ -228,7 +230,7 @@ label[for='toggle-all'] {
   margin-left: 80px;
   display: block;
   line-height: 1.2;
-  transition: color 0.4s;
+  //transition: color 0.4s;
   font-weight: inherit;
 
 }

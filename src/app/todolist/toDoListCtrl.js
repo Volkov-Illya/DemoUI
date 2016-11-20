@@ -81,7 +81,6 @@
           vm.current = '';
           return getAll();
         })
-
     }
 
 
