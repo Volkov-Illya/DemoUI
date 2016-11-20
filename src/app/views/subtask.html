@@ -1,0 +1,29 @@
+<div ng-repeat="sub in task.subTask track by $index">
+  <ul class="list-group">
+    <li class="list-group-item sub">
+      <label>
+        <input class="isDone" type="checkbox" ng-model="sub.isDone" ng-click="vm.editSub(task.id, sub, true)">
+      </label>
+      <a class="glyphicon glyphicon-remove hand" ng-click="vm.removeSub(task, sub)"></a>
+      <a class="glyphicon glyphicon-edit" ng-click="showsub = ! showsub"> </a>
+
+      <span class="done done-{{sub.isDone}}">
+      {{'Subtask name: ' + sub.name}}
+      <br>
+      {{'isDone: ' + sub.isDone}}
+      </span>
+
+    </li>
+  </ul>
+
+  <div ng-show="showsub">
+    <form ng-submit="vm.editSub(task.id, sub)">
+      <p>Change this subtask</p>
+
+      <input class="form-control" type="text" ng-model="sub.name" placeholder="input name">
+      <input class="btn btn-success form-control" type="submit" value="Send"/>
+    </form>
+  </div>
+
+</div>
+

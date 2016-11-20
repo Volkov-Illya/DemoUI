@@ -8,30 +8,20 @@
   /** @ngInject */
   function TodoListCtrl(elTodoListService) {
 
-    var vm = this;
-    vm.getAll = getAll();
-    vm.addTask = addTask;
-    vm.remove = remove;
-    vm.edit = edit;
-    vm.isDone = isDone;
-    vm.isFavourite = isFavourite;
-    vm.meow = meow;
-    vm.findOne = findOne;
+    var vm           = this;
+    vm.getAll        = getAll();
+    vm.doneAll       = doneAll;
+    vm.addTask       = addTask;
+    vm.remove        = remove;
+    vm.isDone        = isDone;
+    vm.editSub       = editSub;
+    vm.editName      = editName;
+    vm.removeSub     = removeSub;
+    vm.isFavourite   = isFavourite;
     vm.createSubtask = createSubtask;
-    vm.getAllSubtask = getAllSubtask;
-    vm.isSubDone = isSubDone;
-    vm.removeSub = removeSub;
-    vm.editSub = editSub;
+    vm.showEdit      = true;
+    vm.saveName      = saveName;
 
-
-
-    function meow() {
-      alert('MEOW BLYJAT')
-    }
-
-    function findOne(task) {
-      elTodoListService.findOne(task)
-    }
 
     function isFavourite(task) {
       elTodoListService.isFavourite(task)
@@ -45,6 +35,13 @@
         .then(function () {
           return getAll();
         });
+    }
+
+    function doneAll(change) {
+      elTodoListService.doneAll(change)
+        .then(function () {
+          return getAll();
+        })
     }
 
 
@@ -70,49 +67,44 @@
         })
     }
 
-    function edit(task) {
+    function editName(task, index) {
+      vm.showEdit = false;
+      vm.current  = index;
+      //onsubmit change value of vm.showEdit to true
+      // vm.canChangeName == false ? vm.canChangeName = true: vm.canChangeName = false;
+    }
+
+    function saveName(task) {
       elTodoListService.edit(task)
+        .then(function () {
+          vm.showEdit = true;
+          vm.current = '';
+          return getAll();
+        })
+
+    }
+
+
+    function createSubtask(task) {
+      elTodoListService.createSubtask(task)
         .then(function () {
           return getAll();
         })
     }
 
-
-    function getAllSubtask(task) {
-      console.log(task);
-      elTodoListService.getAllSubtask(task)
-        .then(function (result) {
-         return  result;
-        });
-    }
-
-    function createSubtask(task) {
-      elTodoListService.createSubtask(task)
-        .then(function (task) {
-          console.log('create');
-          return getAllSubtask(task);
-        })
-    }
-
-    function isSubDone(task, sub) {
-      elTodoListService.isSubDone(task, sub)
-        .then(function (task) {
-          return getAllSubtask(task);
-        });
-    }
-
     function removeSub(task, sub) {
       elTodoListService.removeSub(task, sub)
-        .then(function (task) {
-          console.log(task._id);
-          return getAllSubtask(task);
+        .then(function () {
+          return getAll();
         })
     }
 
-    function editSub(task,sub) {
-      elTodoListService.editSub(task, sub)
-
-
+    function editSub(id, sub, isDone) {
+      sub.changeIsDone = isDone;
+      elTodoListService.editSub(id, sub)
+        .then(function () {
+          return getAll();
+        })
     }
 
   }

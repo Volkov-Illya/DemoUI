@@ -15,11 +15,17 @@
       return Restangular.one('todo/isDone', task._id).customPUT(task)
     }
 
+    function doneAll(change) {
+      console.log(change);
+      return Restangular.one('todo/doneAll').customPUT({isDone: change});
+    }
+
     function getAll() {
       return Restangular.all('todo').getList();
     }
 
     function create(data) {
+      console.log(data);
       return Restangular.all('todo').post(data)
         .then(function () {
           data.name = "";
@@ -32,40 +38,21 @@
     }
 
     function edit(task) {
-      return Restangular.one('todo', task._id).customPUT(task)
-        .then(function () {
-          task.name = null;
-        })
-    }
-
-    function findOne(task) {
+      return Restangular.one('todo', task._id).customPUT(task);
     }
 
 
     function createSubtask(task) {
       return Restangular.one('todo/subtask/', task._id).customPOST({name: task.subTask.name})
-
     }
 
     function removeSub(task, sub) {
       return Restangular.one('todo/subtask/', task._id).customDELETE(sub.name);
     }
 
-    function getAllSubtask(task) {
-      console.log(task);
-      return Restangular.one('todo/subtask', task._id).getList();
+    function editSub(id, sub) {
+      return Restangular.one('todo/task', id).one('subtask', sub.id).customPUT(sub);
     }
-
-    function isSubDone(task, sub) {
-      return Restangular.one('todo/subtask/', task._id).customPUT({name: sub.name});
-    }
-
-    function editSub(task, sub) {
-      console.log(task);
-      console.log(sub.name);
-      return Restangular.one('todo/subtask', task._id).customPUT(sub.name)
-    }
-
 
 
     return {
@@ -75,12 +62,10 @@
       edit: edit,
       isDone: isDone,
       isFavourite: isFavourite,
-      findOne: findOne,
       createSubtask: createSubtask,
-      getAllSubtask: getAllSubtask,
-      isSubDone: isSubDone,
-      removeSub:removeSub,
-      editSub:editSub
+      removeSub: removeSub,
+      editSub: editSub,
+      doneAll: doneAll
     }
   }
 })();
