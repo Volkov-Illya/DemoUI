@@ -9,6 +9,7 @@
       controller: 'TodoListCtrl',
       controllerAs: 'vm',
       link: function(scope, element, attrs) {
+
       }
     }
   })
