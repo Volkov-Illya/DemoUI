@@ -8,7 +8,7 @@
       templateUrl:'app/views/subtask.html',
       controller: 'TodoListCtrl',
       controllerAs: 'vm',
-      link: function(scope, element, attrs, task) {
+      link: function(scope, element, attrs) {
       }
     }
   })

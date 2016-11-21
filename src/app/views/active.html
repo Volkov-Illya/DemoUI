@@ -12,7 +12,7 @@
     <input id="toggle-all" type="checkbox" ng-model="task.isDone" ng-click="vm.doneAll(task.isDone)">
     <label for="toggle-all">Mark all as complete</label>
     <ul id="todo-list">
-      <li ng-repeat="task in vm.getAll"
+      <li ng-repeat="task in vm.showIsDone"
           ng-class="{isDone: task.isDone}">
         <div  class="view form-group">
           <input ng-if="$index !== vm.current" class="toggle" type="checkbox" ng-model="task.isDone"

@@ -7,6 +7,10 @@
 
   function elTodoListService(Restangular) {
 
+    function showIsDone() {
+     return Restangular.all('todo/showIsDone').getList();
+    }
+
     function isFavourite(task) {
       return Restangular.one('todo/isFavourite', task._id).customPUT(task)
     }
@@ -65,7 +69,8 @@
       createSubtask: createSubtask,
       removeSub: removeSub,
       editSub: editSub,
-      doneAll: doneAll
+      doneAll: doneAll,
+      showIsDone:showIsDone
     }
   }
 })();

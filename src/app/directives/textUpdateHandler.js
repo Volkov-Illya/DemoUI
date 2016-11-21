@@ -1,8 +1,33 @@
-// (function () {
-//   'use strict';
-//
-//   angular
-//     .module('todoListUi')
+(function () {
+  'use strict';
+
+  angular
+    .module('todoListUi')
+    // .directive('autoFocus', ['$timeout', function($timeout) {
+    //   return {
+    //     restrict: 'A',
+    //     link : function($scope, $element) {
+    //       $timeout(function() {
+    //         console.log($element);
+    //
+    //         $element[0].focus();
+    //       });
+    //     }
+    //   }
+    // }]);
+
+    .directive('autoFocus', function () {
+      return {
+        scope: {
+          autoFocus: '='
+        },
+        link : function (scope, element) {
+          if (scope.autoFocus) element[0].focus();
+        }
+      }
+    });
+
+
 //     .directive('textUpdateHandler', function ($timeout) {
 //       return {
 //         restrict: 'A',
@@ -41,4 +66,4 @@
 //         }
 //       };
 //     });
-// })();
+})();

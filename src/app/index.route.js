@@ -19,7 +19,14 @@
                 templateUrl: 'app/views/todolist.html',
                 controller: 'TodoListCtrl',
                 controllerAs: 'vm'
-            });
+            })
+          .state('active', {
+          url: '/todo/active',
+          templateUrl: 'app/views/active.html',
+          controller: 'TodoListCtrl',
+          controllerAs: 'vm'
+        })
+      ;
 
         $urlRouterProvider.otherwise('/');
     }

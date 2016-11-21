@@ -21,6 +21,9 @@
     vm.createSubtask = createSubtask;
     vm.showEdit      = true;
     vm.saveName      = saveName;
+    vm.showIsDone    = showIsDone();
+
+
 
 
     function isFavourite(task) {
@@ -48,8 +51,18 @@
     function getAll() {
       elTodoListService.getAll()
         .then(function (result) {
+          console.log(result);
           vm.getAll = result;
         });
+    }
+
+    function showIsDone() {
+      elTodoListService.showIsDone()
+        .then(function (result) {
+          console.log(result);
+          vm.showIsDone = result;
+
+        })
     }
 
     function addTask(task) {
@@ -67,18 +80,17 @@
         })
     }
 
-    function editName(task, index) {
+    function editName(index) {
       vm.showEdit = false;
       vm.current  = index;
-      //onsubmit change value of vm.showEdit to true
-      // vm.canChangeName == false ? vm.canChangeName = true: vm.canChangeName = false;
+      console.log(index);
     }
 
     function saveName(task) {
       elTodoListService.edit(task)
         .then(function () {
           vm.showEdit = true;
-          vm.current = '';
+          vm.current  = '';
           return getAll();
         })
     }
