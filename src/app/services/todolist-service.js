@@ -64,7 +64,6 @@
     }
 
 
-
     return {
       getAll       : getAll,
       create       : create,
