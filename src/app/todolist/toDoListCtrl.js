@@ -25,10 +25,6 @@
     vm.clearIsDone   = clearIsDone;
 
 
-
-
-
-
     function clearIsDone() {
       elTodoListService.clearIsDone()
         .then(function () {
