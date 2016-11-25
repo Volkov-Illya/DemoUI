@@ -9,24 +9,31 @@
     function routerConfig($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('home', {
-                url: '/',
+                url: '/www',
                 templateUrl: 'app/main/main.html',
                 controller: 'MainController',
                 controllerAs: 'main'
             })
             .state('todolist', {
-                url: '/todo',
+                url: '/',
                 templateUrl: 'app/views/todolist.html',
                 controller: 'TodoListCtrl',
                 controllerAs: 'vm'
             })
-          .state('active', {
-          url: '/todo/active',
-          templateUrl: 'app/views/active.html',
-          controller: 'TodoListCtrl',
-          controllerAs: 'vm'
-        })
-      ;
+
+            .state('toastrtodolist', {
+                url: '/',
+                templateUrl: 'app/views/todolist.html',
+                controller: 'ToastrCtrl',
+                controllerAs: 'ts'
+              });
+        //   .state('active', {
+        //   url: '/todo/active',
+        //   templateUrl: 'app/views/active.html',
+        //   controller: 'TodoListCtrl',
+        //   controllerAs: 'vm'
+        // })
+
 
         $urlRouterProvider.otherwise('/');
     }

@@ -39,6 +39,15 @@ input[type="checkbox"] {
   outline: none;
 }
 
+hr {
+  margin-bottom: 0;
+}
+
+p {
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
 .hidden {
   display: none;
 }
@@ -57,8 +66,6 @@ input[type="checkbox"] {
   color: #e6e6e6;
 }
 
-
-
 #todoapp h1 {
   position: absolute;
   top: -127px;
@@ -72,9 +79,7 @@ input[type="checkbox"] {
   text-rendering: optimizeLegibility;
 }
 
-
-
-#new-todo,
+.new-todo,
 .edit {
   position: relative;
   margin: 0;
@@ -95,11 +100,38 @@ input[type="checkbox"] {
   font-smoothing: antialiased;
 }
 
-#new-todo {
-  padding: 16px 16px 16px 60px;
+.new-todo {
+  padding: 8px 16px 8px 60px;
   border: none;
   background: rgba(0, 0, 0, 0.003);
-  box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
+  box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
+}
+
+.subtask {
+  font-family: Aparajita;
+  line-height: 1.3em;
+}
+
+.new-subtask {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  font-size: 24px;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: 1.4em;
+  border: 0;
+  outline: none;
+  color: inherit;
+  //border: 1px solid #999;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  padding: 16px 16px 16px 60px;
+  border-bottom: 1px solid #e6e6e6;
+  background: rgba(0, 0, 0, 0.003);
+  box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
 }
 
 #main {
@@ -109,6 +141,9 @@ input[type="checkbox"] {
 
 }
 
+.form-group {
+  margin-top: 15px;
+}
 
 .glyphicon:before {
   visibility: visible;
@@ -116,6 +151,7 @@ input[type="checkbox"] {
 
 .glyphicon.glyphicon-star-empty:checked:before {
   content: "\e006";
+  margin-bottom: 10px;
 }
 
 input[type=checkbox].glyphicon {
@@ -127,7 +163,6 @@ input[type=checkbox].glyphicon {
   text-align: center;
   width: 136px;
   height: auto;
-  top: 10px;
   bottom: 0;
   margin: auto 0;
   outline: none;
@@ -135,18 +170,14 @@ input[type=checkbox].glyphicon {
   font-size: larger;
 }
 
-
-
-
 label[for='toggle-all'] {
   display: none;
 }
 
 #toggle-all {
   position: absolute;
-  top: -55px;
-  left: -12px;
-  width: 60px;
+  top: -95px;
+  width: 50px;
   height: 34px;
   text-align: center;
   outline: none;
@@ -157,13 +188,12 @@ label[for='toggle-all'] {
   content: '❯';
   font-size: 22px;
   color: #e6e6e6;
-  padding: 10px 27px 10px 27px;
+  padding: -1px 27px 10px 27px;
 }
 
 #toggle-all:checked:before {
   color: #737373;
 }
-
 
 #todo-list {
   margin: 0;
@@ -175,9 +205,6 @@ label[for='toggle-all'] {
 #todo-list li {
   position: relative;
   font-size: 24px;
-  height: 59px;
-  //font-family: inherit;
-  //font-style: inherit;
   border-bottom: 1px solid #ededed;
 }
 
@@ -210,9 +237,11 @@ label[for='toggle-all'] {
 
 #todo-list li.editing .view {
   display: none;
+
 }
 
 #todo-list li .toggle {
+  margin-bottom: 0;
   text-align: center;
   width: 40px;
   /* auto, since non-WebKit browsers doesn't support input styling */
@@ -220,11 +249,15 @@ label[for='toggle-all'] {
   position: absolute;
   top: 0;
   bottom: 0;
-  margin: auto 0;
+  //margin: auto 0;
   outline: none;
   border: none; /* Mobile Safari */
   -webkit-appearance: none;
   appearance: none;
+}
+
+#todo-list li .subdone {
+  top: -9px;
 }
 
 #todo-list li .toggle:after {
@@ -236,9 +269,9 @@ label[for='toggle-all'] {
 }
 
 #todo-list li label {
-  white-space: pre-line;
+  white-space: normal;
   word-break: break-all;
-  padding: 15px 60px 15px 15px;
+  padding: 0 60px 0 15px;
   margin-left: 80px;
   display: block;
   line-height: 1.2;
@@ -249,9 +282,19 @@ label[for='toggle-all'] {
 
 }
 
-#todo-list li.isDone label {
+#todo-list li.isDone label button {
   color: #d9d9d9;
   text-decoration: line-through;
+}
+
+#todo-list li.isDone label p {
+  color: #d9d9d9;
+  text-decoration: line-through;
+}
+
+#todo-list li label.sub {
+  padding: 0 60px 0 15px;
+  margin: 15px 0 15px 40px;
 }
 
 #todo-list li .destroy {
@@ -262,9 +305,8 @@ label[for='toggle-all'] {
   bottom: 0;
   width: 40px;
   height: 40px;
-  margin: auto 0;
   font-size: 30px;
-  color:rgba(99, 133, 197, 0.38);
+  color: rgba(99, 133, 197, 0.38);
   margin-bottom: 11px;
   transition: color 0.2s ease-out;
 }
@@ -287,6 +329,13 @@ label[for='toggle-all'] {
 
 #todo-list li.editing:last-child {
   margin-bottom: -1px;
+}
+
+.date {
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(99, 133, 197, 0.38);
+  margin-top: 10px;
 }
 
 #footer {
@@ -323,7 +372,6 @@ label[for='toggle-all'] {
 
 #filters {
   margin: 0;
-  //margin-bottom: 0px;
   padding: 0;
   list-style: none;
   position: absolute;
@@ -353,7 +401,21 @@ label[for='toggle-all'] {
   border-color: rgba(175, 47, 47, 0.2);
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) {
+#clear-completed,
+html #clear-completed:active {
+  float: right;
+  position: relative;
+  line-height: 20px;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+}
+
+#clear-completed:hover {
+  text-decoration: underline;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
   #toggle-all,
   #todo-list li .toggle {
     background: none;
@@ -371,124 +433,17 @@ label[for='toggle-all'] {
   }
 }
 
-//@media (max-width: 430px) {
-//  #footer {
-//    height: 50px;
-//  }
-//
-//  #filters {
-//    bottom: 10px;
-//  }
-//}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//.list-group-item {
-//  font-size: 2em;
-//  background-color: #e3e3e3;
-//  border-radius: 4px;
-//  border: 1px solid #999;
-//  text-align: left;
-//}
-//
-//
-//
-//.edit-list {
-//  position: inherit;
-//  font-family: Helvetica, Arial, Sans-Serif;
-//  font-weight: 700;
-//  top: 50px;
-//  left: 250px;
-//  padding: 6px 30px;
-//}
-//
-//.done-true {
-//  text-decoration: line-through;
-//  color: grey;
-//  text-align: left;
-//
-//}
-//
-//.done {
-//  position: inherit;
-//  left: 50px;
-//
-//}
-//
-//.isDone {
-//  position: absolute;
-//  height: 25px;
-//  width: 25px;
-//  top: 10px;
-//  left: 25px;
-//}
-//
-//.sub{
-//  background-color: #bd7575;
-//}
-
-
-
-
-//.glyphicon-remove {
-//  position: absolute;
-//  right: 15px;
-//  top: 5px;
-//}
-//
-//.glyphicon-edit {
-//  position: absolute;
-//  right: 15px;
-//  top: 53px;
-//}
-//
-//.glyphicon-inbox{
-//  position: absolute;
-//  right: 15px;
-//  top: 105px;
-//}
-
-
-//.remove-list {
-//  position: absolute;
-//  font-family: Helvetica, Arial, Sans-Serif;
-//  font-weight: 700;
-//}
-//
-//.edit-data{
-//  width: 50%;
-//}
+.list-group {
+  margin-bottom: 0;
+}
 
 .edit-task {
   margin-left: 80px;
   border: none;
   line-height: 1.2;
-  background: #e2e2e2;
-  //transition: color .4s;
-outline: none;
+  color: indianred;
+  background: rgba(99, 133, 197, 0.38);
+  outline: none;
   border-bottom: none;
   padding: 15px 163px 15px 15px
 }

@@ -7,8 +7,9 @@
 
   function elTodoListService(Restangular) {
 
-    function showIsDone() {
-     return Restangular.all('todo/showIsDone').getList();
+
+    function clearIsDone() {
+      return Restangular.all('todo/clearIsDone').remove();
     }
 
     function isFavourite(task) {
@@ -20,19 +21,20 @@
     }
 
     function doneAll(change) {
-      console.log(change);
       return Restangular.one('todo/doneAll').customPUT({isDone: change});
     }
 
     function getAll() {
-      return Restangular.all('todo').getList();
+      return Restangular.all('todo').getList()
+        .then(function (res) {
+          return res;
+        })
     }
 
     function create(data) {
-      console.log(data);
       return Restangular.all('todo').post(data)
         .then(function () {
-          data.name = "";
+          data.name        = "";
           data.description = "";
         })
     }
@@ -55,22 +57,28 @@
     }
 
     function editSub(id, sub) {
-      return Restangular.one('todo/task', id).one('subtask', sub.id).customPUT(sub);
+      return Restangular.one('todo/task', id).one('subtask', sub.id).customPUT(sub)
+        .then(function (res) {
+
+          return res;
+        })
     }
 
 
+
     return {
-      getAll: getAll,
-      create: create,
-      remove: remove,
-      edit: edit,
-      isDone: isDone,
-      isFavourite: isFavourite,
+      getAll       : getAll,
+      create       : create,
+      remove       : remove,
+      edit         : edit,
+      isDone       : isDone,
+      isFavourite  : isFavourite,
       createSubtask: createSubtask,
-      removeSub: removeSub,
-      editSub: editSub,
-      doneAll: doneAll,
-      showIsDone:showIsDone
+      removeSub    : removeSub,
+      editSub      : editSub,
+      doneAll      : doneAll,
+      clearIsDone  : clearIsDone,
+
     }
   }
 })();

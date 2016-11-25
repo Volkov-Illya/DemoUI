@@ -1,19 +1,17 @@
 <section id="todoapp">
   <header>
     <h1>Todo List</h1>
-    <form ng-submit="vm.addTask(task)">
-      <input id="new-todo" placeholder="Input new task" ng-model="task.name">
-      <!--<input class="new-todo" type="text" placeholder="Input description"  ng-model="task.description">-->
+    <form ng-keyup="$event.keyCode == 13 && vm.addTask(task)" >
+      <input class="new-todo" placeholder="Input new task" ng-model="task.name">
+      <input class="new-todo" type="text" placeholder="Input description"  ng-model="task.description">
     </form>
   </header>
-
 
   <section id="main">
     <input id="toggle-all" type="checkbox" ng-model="task.isDone" ng-click="vm.doneAll(task.isDone)">
     <label for="toggle-all">Mark all as complete</label>
     <ul id="todo-list">
-      <li ng-repeat="task in vm.getAll"
-          ng-class="{isDone: task.isDone}">
+      <li ng-repeat="task in vm.getAll|filter:myFilter" ng-class="{isDone: task.isDone}">
         <div  class="view form-group">
           <input ng-if="$index !== vm.current" class="toggle" type="checkbox" ng-model="task.isDone"
                  ng-change="vm.isDone(task)">
@@ -21,17 +19,36 @@
                  ng-click="vm.isFavourite(task)"
                  ng-model="task.isFavourite">
 
-          <label  ng-click="vm.editName($index)" ng-if="$index !== vm.current">{{task.name}}</label>
+          <label   ng-if="$index !== vm.current">
+            <button ng-click="vm.editName($index)"> {{task.name}}</button>
+            <br>
+            <p class="subtask">{{task.description}}</p>
+
+           <button ng-click="Event = !Event" class="date">{{task.createdAt| date: "MMMM dd, yyyy 'at' HH:mm"}}</button>
+
+            <form  ng-show="Event" ng-submit="vm.createSubtask(task)" >
+              <hr>
+              <input class="new-subtask" type="text"  ng-model="task.subTask.name"   placeholder="Create new subtask"/>
+            </form>
+            <el-subtask task="task" ng-show="Event"></el-subtask>
+                        <!--<input type="text" date-time="" ng-model="task.createdAt" view="hours" format="lll" class="ng-pristine ng-valid ng-scope ng-touched">-->
+          </label>
+
+
           <form ng-submit="vm.saveName(task, $event)"  ng-show="$index==vm.current && !vm.showEdit">
-            <input  ng-blur="vm.saveName(task, $event)" autofocus id="input" class="edit-task" type="text" ng-model="task.name">
+            <input
+              ng-keyup="$event.keyCode == 27 && vm.saveName(task)"
+              ng-blur="vm.saveName(task, $event)" autofocus id="input" class="edit-task" type="text" ng-model="task.name">
           </form>
           <button  ng-if="$index !== vm.current" class="destroy" ng-click="vm.remove(task._id)"></button>
 
         </div>
       </li>
     </ul>
-  </section>
 
+
+
+  </section>
 
   <footer id="footer">
       <span id="todo-count"><strong>{{vm.getAll.length}}</strong>
@@ -41,18 +58,20 @@
 					</span>
     <ul id="filters">
       <li>
-        <a  href="#/todo">All</a>
+        <a href="#/todo" ng-click="myFilter = {}">All</a>
       </li>
       <li>
-        <a  href="#/todo/active">Active</a>
+        <a href="#/todo" ng-click="myFilter = {isDone: false}">Active</a>
       </li>
       <li>
-        <a>Completed</a>
+        <a href="#/todo" ng-click="myFilter = {isDone: true}">Completed</a>
       </li>
     </ul>
+    <button id="clear-completed"  ng-click="vm.clearIsDone(vm.getAll)">Clear completed</button>
   </footer>
 
 </section>
+
 
 
 <!--<div class="container">-->
@@ -61,13 +80,13 @@
 <!--<div class="page-header">-->
 <!--<h1>Todo List App</h1>-->
 <!--</div>-->
-<!--&lt;!&ndash;<form class="form-group control-label" name="addForm" ng-submit="vm.addTask(task)">&ndash;&gt;-->
+<!--<form class="form-group control-label" name="addForm" ng-submit="vm.addTask(task)">-->
 <!--Create new task:-->
-<!--&lt;!&ndash;<input class="form-control" type="text" ng-model="task.name" name="name" placeholder=" name"/>&ndash;&gt;-->
-<!--&lt;!&ndash;<input class="form-control" type="text" ng-model="task.description" name="description"&ndash;&gt;-->
-<!--&lt;!&ndash;placeholder=" description"/>&ndash;&gt;-->
-<!--&lt;!&ndash;<input class="btn btn-success form-control" type="submit"  value="Submit"/>&ndash;&gt;-->
-<!--&lt;!&ndash;</form>&ndash;&gt;-->
+<!--<input class="form-control" type="text" ng-model="task.name" name="name" placeholder=" name"/>-->
+<!--<input class="form-control" type="text" ng-model="task.description" name="description"-->
+<!--placeholder=" description"/>-->
+<!--<input class="btn btn-success form-control" type="submit"  value="Submit"/>-->
+<!--</form>-->
 <!--<div  ng-repeat="task in vm.getAll" >-->
 
 <!--<button type="button" class="list-group-item"  >-->
@@ -100,14 +119,14 @@
 <!--<input class="btn btn-success form-control" type="submit" ng-click="vm.edit(task)" value="Send"/>-->
 <!--</form>-->
 <!--</div>-->
-
-
 <!--<form class="form-group control-label" name="addForm" ng-show="Event" ng-submit="vm.createSubtask(task)" >-->
-<!--Create new subtask:-->
-<!--<input class="form-control" type="text"  ng-model="task.subTask.name"   placeholder=" name"/>-->
-<!--<input class="btn btn-success form-control" type="submit"  value="Submit"/>-->
+  <!--Create new subtask:-->
+  <!--<input class="form-control" type="text"  ng-model="task.subTask.name"   placeholder=" name"/>-->
+  <!--<input class="btn btn-success form-control" type="submit"  value="Submit"/>-->
 <!--</form>-->
 <!--<el-subtask task="task" ng-show="Event"></el-subtask>-->
+
+
 
 <!--</div>-->
 <!--</div>-->

@@ -2,6 +2,7 @@
   'use strict';
   angular.module('todoListUi').directive('elSubtask', function() {
     return {
+
       scope: {
         task: '='
       },
@@ -9,6 +10,7 @@
       controller: 'TodoListCtrl',
       controllerAs: 'vm',
       link: function(scope, element, attrs) {
+
 
       }
     }
