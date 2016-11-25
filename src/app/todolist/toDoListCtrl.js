@@ -6,7 +6,7 @@
     .controller('TodoListCtrl', TodoListCtrl);
 
   /** @ngInject */
-  function TodoListCtrl(elTodoListService, toastr, $scope) {
+  function TodoListCtrl(elTodoListService, toastr) {
 
     var vm           = this;
     vm.getAll        = getAll();
