@@ -5,7 +5,6 @@
     .module('todoListUi')
     .controller('TodoListCtrl', TodoListCtrl);
 
-
   /** @ngInject */
   function TodoListCtrl(elTodoListService, toastr, $scope) {
 
@@ -145,6 +144,4 @@
     }
 
   }
-
-
 })();

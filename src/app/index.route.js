@@ -19,21 +19,7 @@
                 templateUrl: 'app/views/todolist.html',
                 controller: 'TodoListCtrl',
                 controllerAs: 'vm'
-            })
-
-            .state('toastrtodolist', {
-                url: '/',
-                templateUrl: 'app/views/todolist.html',
-                controller: 'ToastrCtrl',
-                controllerAs: 'ts'
-              });
-        //   .state('active', {
-        //   url: '/todo/active',
-        //   templateUrl: 'app/views/active.html',
-        //   controller: 'TodoListCtrl',
-        //   controllerAs: 'vm'
-        // })
-
+            });
 
         $urlRouterProvider.otherwise('/');
     }
