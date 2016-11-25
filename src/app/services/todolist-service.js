@@ -59,7 +59,6 @@
     function editSub(id, sub) {
       return Restangular.one('todo/task', id).one('subtask', sub.id).customPUT(sub)
         .then(function (res) {
-
           return res;
         })
     }
@@ -77,7 +76,7 @@
       removeSub    : removeSub,
       editSub      : editSub,
       doneAll      : doneAll,
-      clearIsDone  : clearIsDone,
+      clearIsDone  : clearIsDone
 
     }
   }
