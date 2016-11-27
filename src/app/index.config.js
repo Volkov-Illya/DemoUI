@@ -4,9 +4,9 @@
     angular
         .module('todoListUi')
         .config(config)
-        .config(function (RestangularProvider) {
+        .config(function (RestangularProvider, API_EP) {
             // var API = 'http://localhost:3000/';
-            RestangularProvider.setBaseUrl('http://localhost:3000');
+            RestangularProvider.setBaseUrl(API_EP);
         });
 
     /** @ngInject */

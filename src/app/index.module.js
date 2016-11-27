@@ -2,6 +2,7 @@
   'use strict';
 
   angular
-    .module('todoListUi', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'restangular', 'ui.router', 'ui.bootstrap', 'toastr','datePicker']);
+    .module('todoListUi', ['ngAnimate','ngConstants', 'ngCookies', 'ngTouch',
+      'ngSanitize', 'ngMessages', 'ngAria', 'restangular', 'ui.router', 'ui.bootstrap', 'toastr','datePicker']);
 
 })();
