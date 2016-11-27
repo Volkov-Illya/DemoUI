@@ -48,8 +48,7 @@
     "uglify-save-license": "~0.4.1"
   },
   "scripts": {
-    "preinstall": "bower install",
-    "start": "gulp clean && gulp build && cd dist/ && http-server",
+    "start": "bower install && gulp clean && gulp build && cd dist/ && http-server",
     "test": "gulp test"
   },
   "engines": {
