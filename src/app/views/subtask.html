@@ -1,0 +1,26 @@
+<ul id="todo-list">
+  <li ng-repeat="sub in task.subTask|orderBy:name track by $index" ng-class="{isDone: sub.isDone}">
+
+    <div class="view">
+      <input class="toggle subdone" type="checkbox" ng-model="sub.isDone"
+             ng-change="vm.editSub(task.id, sub, true)">
+      <label class="sub">
+        <button ng-click="vm.editName($index)"> {{sub.name}}</button>
+
+      </label>
+
+      <button  class="destroy" ng-click="vm.removeSub(task, sub)"></button>
+    </div>
+  </li>
+</ul>
+
+<div ng-show="showsub">
+  <form ng-submit="vm.editSub(task.id, sub)">
+    <p>Change this subtask</p>
+    <input class="form-control" type="text" ng-model="sub.name" placeholder="input name">
+    <input class="btn btn-success form-control" type="submit" value="Send"/>
+  </form>
+</div>
+
+
+
