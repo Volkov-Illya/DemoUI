@@ -3,15 +3,8 @@
   "version": "0.0.0",
   "dependencies": {
     "gulp": "^3.9.1",
-    "gulp-ng-constant": "^2.0.0-2"
-  },
-  "scripts": {
-    "start": "gulp clean && gulp build && cd dist/ && http-server",
-    "test": "gulp test"
-  },
-  "devDependencies": {
+    "gulp-ng-constant": "^2.0.0-2",
     "estraverse": "~4.1.0",
-    "gulp": "~3.9.0",
     "gulp-autoprefixer": "~3.0.2",
     "gulp-angular-templatecache": "~1.8.0",
     "del": "~2.0.2",
@@ -52,6 +45,10 @@
     "http-proxy-middleware": "~0.9.0",
     "chalk": "~1.1.1",
     "uglify-save-license": "~0.4.1"
+  },
+  "scripts": {
+    "start": "gulp clean && gulp build && cd dist/ && http-server",
+    "test": "gulp test"
   },
   "engines": {
     "node": ">=0.10.0"
