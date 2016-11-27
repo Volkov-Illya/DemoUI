@@ -8,3 +8,4 @@ dist/
 bower_components/
 .tmp/
 .idea/
+src/app/constants
